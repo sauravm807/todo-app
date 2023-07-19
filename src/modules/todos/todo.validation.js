@@ -26,6 +26,14 @@ class Validation {
         });
         return schema.validate(data);
     }
+   
+    params(data) {
+        const schema = Joi.object({
+            skip: Joi.number().positive(),
+            limit: Joi.number().positive()
+        });
+        return schema.validate(data);
+    }
 }
 
 module.exports = new Validation();

@@ -28,13 +28,20 @@ class Modal {
                 `);
     }
 
-    getAllTodos({ id }) {
-        return mysql.query(`
+    getAllTodos({ id, skip, limit }) {
+        let query = `
                     SELECT
                         id, user_id, title, description, status, created_at, updated_at
                     FROM todo
-                    WHERE user_id = ${id};
-                `);
+                    WHERE user_id = ${id}
+                `;
+        
+        if (limit) {
+            query += ` LIMIT ${limit} `;
+            if (skip) query += `OFFSET ${skip}`;
+        }
+            
+        return mysql.query(query);
     }
 
     getTodoById({ id, uid }) {

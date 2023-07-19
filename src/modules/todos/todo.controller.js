@@ -13,7 +13,12 @@ class TodoController {
         try {
             const { id } = req.user;
 
-            const [todos] = await model.getAllTodos({ id });
+            // validation
+            const { error, value } = validation.params(req.body);
+            if (error) return next({ status: 403, message: error.details[0].message });
+
+            const { skip, limit } = value;
+            const [todos] = await model.getAllTodos({ id, skip, limit });
 
             if (!todos.length) return next({ status: 404, message: 'No todo found.' });
 
