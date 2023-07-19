@@ -9,11 +9,20 @@ class Validation {
         });
         return schema.validate(data);
     }
-
-    login(data) {
+    
+    update(data) {
         const schema = Joi.object({
-            email: Joi.string().email().required(),
-            password: Joi.string().min(3).max(30).required()
+            id: Joi.number().positive().required(),
+            title: Joi.string().min(3).max(1000),
+            description: Joi.string().min(3).max(1000),
+            status: Joi.boolean()
+        });
+        return schema.validate(data);
+    }
+
+    params(data) {
+        const schema = Joi.object({
+            id: Joi.number().positive().required()
         });
         return schema.validate(data);
     }

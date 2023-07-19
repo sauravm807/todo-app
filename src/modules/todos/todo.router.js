@@ -14,7 +14,7 @@ class AuthRouter {
         this.routes.get("/", todoController.getAllTodos);
         this.routes.get("/:id", todoController.getTodoById);
         this.routes.post("/", todoController.createTodo);
-        this.routes.put("/:id", todoController.updateTodo);
+        this.routes.put("/", todoController.updateTodo);
         this.routes.delete("/:id", todoController.deleteTodo);
     }
 
